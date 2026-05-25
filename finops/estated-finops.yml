@@ -1,0 +1,65 @@
+name: Estated FinOps Profile
+description: >-
+  FinOps Framework mapping for the Estated Property Data API. Estated bills
+  primarily per successful property match, with non-billable warning events
+  (no property found, multiple properties, unparseable address) that should be
+  filtered out of cost modeling. Bulk and enterprise contracts move pricing
+  from variable per-call to committed-volume / subscription, which materially
+  changes the FinOps shape.
+specificationVersion: "0.1"
+provider: estated
+focus_alignment:
+  spec: FOCUS 1.0
+  billing_period: monthly
+  service_category: Data / Property Data API
+  service_subcategory: Real-Estate Property Records
+cost_drivers:
+  - name: successful_property_match
+    unit: request
+    billable: true
+    notes:
+      - Successful 200 responses with a populated `data` object are the primary chargeable event.
+  - name: warning_no_property
+    unit: request
+    billable: false
+    code: PW01
+  - name: warning_multiple_properties
+    unit: request
+    billable: false
+    code: PW02
+  - name: warning_address_not_found
+    unit: request
+    billable: false
+    code: APW01
+  - name: warning_unknown_suffix
+    unit: request
+    billable: conditional
+    code: APW02
+    notes:
+      - Billable only if a property match was also found.
+commitment_models:
+  - on-demand (pay-as-you-go)
+  - subscription (monthly committed call volume)
+  - enterprise (custom annual commitment, volume discounts, SLA)
+allocation_dimensions:
+  - token
+  - account_id (ATTOM/Estated)
+  - environment (production)
+  - downstream consumer / cost center (customer-defined)
+optimization_levers:
+  - Cache property records by FIPS+APN where regulatory / contract permits.
+  - Pre-validate / normalize addresses before sending lookups to reduce non-billable APE01 / APW01 traffic.
+  - Use FIPS+APN lookups in bulk workflows to avoid address-parsing ambiguity (PW02).
+  - Move to ATTOM Property Data API for very-high volume use cases where contract economics favor it.
+governance:
+  observability:
+    - Log `metadata.attom_id` for downstream cost-to-record attribution.
+    - Track `warnings[].code` distribution to monitor unbilled vs billed ratio.
+  guardrails:
+    - Alert on AE03 (token exhausted) to avoid silent service disruption.
+    - Alert on RE04 (throttling) to detect overload before user-visible failures.
+links:
+  - type: Documentation
+    url: https://estated.com/developers/docs/v4/property/overview
+  - type: ContactSales
+    url: https://www.attomdata.com/contact-us/

@@ -1,0 +1,106 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://apis.estated.com/v4/property",
+    "query": {
+      "token": "YOUR_TOKEN_HERE",
+      "combined_address": "151 Battle Green Dr, Rochester, NY 14624"
+    }
+  },
+  "response": {
+    "data": {
+      "metadata": {
+        "attom_id": 0,
+        "publishing_date": "2024-09-15"
+      },
+      "address": {
+        "street_number": "151",
+        "street_name": "Battle Green",
+        "street_suffix": "Dr",
+        "formatted_street_address": "151 Battle Green Dr",
+        "city": "Rochester",
+        "state": "NY",
+        "zip_code": "14624",
+        "latitude": 43.1456,
+        "longitude": -77.7234,
+        "census_tract": "036513006002"
+      },
+      "parcel": {
+        "apn_original": "117.06-1-12.1",
+        "fips_code": "36055",
+        "area_sq_ft": 18000,
+        "area_acres": 0.413,
+        "county_name": "Monroe",
+        "standardized_land_use_category": "Residential",
+        "standardized_land_use_type": "Single Family Residential",
+        "zoning": "R1-A",
+        "building_count": 1,
+        "subdivision": "Battle Green"
+      },
+      "structure": {
+        "year_built": 1972,
+        "stories": "1",
+        "rooms_count": 7,
+        "beds_count": 3,
+        "baths": 2.0,
+        "units_count": 1,
+        "parking_type": "Attached Garage",
+        "parking_spaces_count": 2,
+        "construction_type": "Wood Frame",
+        "exterior_wall_type": "Aluminum / Vinyl",
+        "roof_material_type": "Composition Shingle",
+        "heating_type": "Forced Air",
+        "heating_fuel_type": "Gas",
+        "total_area_sq_ft": 1840
+      },
+      "taxes": [
+        { "year": 2024, "amount": 6820, "exemptions": [], "rate_code_area": "26115" }
+      ],
+      "assessments": [
+        { "year": 2024, "land_value": 24000, "improvement_value": 156000, "total_value": 180000 }
+      ],
+      "market_assessments": [
+        { "year": 2024, "land_value": 32000, "improvement_value": 208000, "total_value": 240000 }
+      ],
+      "valuation": {
+        "value": 268000,
+        "high": 295000,
+        "low": 242000,
+        "forecast_standard_deviation": 9,
+        "date": "2024-09-15"
+      },
+      "owner": {
+        "name": "DOE JOHN",
+        "formatted_street_address": "151 Battle Green Dr",
+        "city": "Rochester",
+        "state": "NY",
+        "zip_code": "14624",
+        "owner_occupied": "YES"
+      },
+      "deeds": [
+        {
+          "document_type": "Warranty Deed",
+          "recording_date": "2015-06-12",
+          "original_contract_date": "2015-05-28",
+          "sale_price": 185000,
+          "distressed_sale": false,
+          "buyer_last_name": "DOE",
+          "buyer_first_name": "JOHN",
+          "seller_last_name": "SMITH"
+        }
+      ],
+      "boundary": {
+        "wkt": "MULTIPOLYGON (((-77.7240 43.1452, -77.7228 43.1452, -77.7228 43.1460, -77.7240 43.1460, -77.7240 43.1452)))",
+        "geojson": {
+          "type": "MultiPolygon",
+          "coordinates": [[[[-77.7240, 43.1452], [-77.7228, 43.1452], [-77.7228, 43.1460], [-77.7240, 43.1460], [-77.7240, 43.1452]]]]
+        }
+      }
+    },
+    "metadata": {
+      "attom_id": 0,
+      "publishing_date": "2024-09-15"
+    },
+    "warnings": []
+  }
+}

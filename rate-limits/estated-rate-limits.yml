@@ -1,0 +1,43 @@
+name: Estated Rate Limits
+description: >-
+  Documented rate-limit / throttling policies for the Estated Property Data
+  API v4. Estated enforces server-side throttling on incoming requests and
+  signals throttling to clients via the `RE04` request error
+  ("Requests are being throttled due to a high number of requests"). Specific
+  per-token request-per-second or burst limits are not published in the
+  public documentation; they are scoped to plan/contract and are tightened
+  on the path to ATTOM infrastructure.
+specificationVersion: "0.1"
+provider: estated
+policies:
+  - name: per-token throttle
+    type: requests-per-window
+    enforcement: server-side
+    signal: HTTP error envelope with code RE04
+    documented_value: null
+    notes:
+      - Public docs state that "requests are being throttled due to a high number of requests" without disclosing the numeric ceiling.
+      - Throttle ceilings vary by plan / contract.
+  - name: request size limit
+    type: max-request-size
+    enforcement: server-side
+    signal: HTTP error envelope with code RE03 ("The attempted request is too large")
+  - name: call quota
+    type: account-quota
+    enforcement: server-side
+    signal: HTTP error envelope with code AE03 ("The given token has no calls remaining")
+    notes:
+      - Plan-scoped monthly / contract call allotment.
+  - name: HTTP method allowlist
+    type: method-restriction
+    enforcement: server-side
+    signal: HTTP error envelope with code RE06
+    allowed_methods: [GET, OPTIONS]
+unbilled_responses:
+  - PW01
+  - PW02
+  - APW01
+  - APW02 (unless a property match was also returned)
+links:
+  - type: Documentation
+    url: https://estated.com/developers/docs/v4/property/overview

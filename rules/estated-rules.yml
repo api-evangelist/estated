@@ -1,0 +1,45 @@
+extends: spectral:oas
+rules:
+  estated-title-case-summary:
+    description: Operation summaries must use Title Case.
+    message: "{{property}} should be Title Case"
+    severity: warn
+    given: "$.paths.*.*.summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)(\\s+[A-Z][a-zA-Z0-9]*)*$"
+  estated-operation-id-camel:
+    description: operationId must be camelCase.
+    message: "{{property}} should be camelCase"
+    severity: warn
+    given: "$.paths.*.*.operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+  estated-snake-case-property:
+    description: Estated response properties use snake_case throughout.
+    message: "{{property}} should be snake_case"
+    severity: warn
+    given: "$.components.schemas..properties[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+  estated-token-required:
+    description: Every operation must list `token` as a required query parameter.
+    severity: error
+    given: "$.paths.*.get"
+    then:
+      field: parameters
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            type: object
+            properties:
+              name: { const: token }
+              in: { const: query }
+              required: { const: true }

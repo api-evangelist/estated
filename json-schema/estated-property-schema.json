@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/estated/refs/heads/main/json-schema/estated-property-schema.json",
+  "title": "Estated Property",
+  "description": "A single U.S. property record returned by the Estated Property Data API v4, containing assessor, parcel, structure, valuation, owner, deeds, and boundary data.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "attom_id": { "type": "integer" },
+        "publishing_date": { "type": "string", "format": "date" }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street_number": { "type": ["string", "null"] },
+        "street_pre_direction": { "type": ["string", "null"] },
+        "street_name": { "type": ["string", "null"] },
+        "street_suffix": { "type": ["string", "null"] },
+        "street_post_direction": { "type": ["string", "null"] },
+        "unit_type": { "type": ["string", "null"] },
+        "unit_number": { "type": ["string", "null"] },
+        "formatted_street_address": { "type": ["string", "null"] },
+        "city": { "type": ["string", "null"] },
+        "state": { "type": ["string", "null"] },
+        "zip_code": { "type": ["string", "null"] },
+        "zip_plus_four_code": { "type": ["string", "null"] },
+        "carrier_code": { "type": ["string", "null"] },
+        "latitude": { "type": ["number", "null"] },
+        "longitude": { "type": ["number", "null"] },
+        "geocoding_accuracy": { "type": ["string", "null"] },
+        "census_tract": { "type": ["string", "null"] }
+      }
+    },
+    "parcel": {
+      "type": "object",
+      "properties": {
+        "apn_original": { "type": ["string", "null"] },
+        "apn_unformatted": { "type": ["string", "null"] },
+        "apn_previous": { "type": ["string", "null"] },
+        "fips_code": { "type": ["string", "null"] },
+        "depth_ft": { "type": ["number", "null"] },
+        "frontage_ft": { "type": ["number", "null"] },
+        "area_sq_ft": { "type": ["integer", "null"] },
+        "area_acres": { "type": ["number", "null"] },
+        "county_name": { "type": ["string", "null"] },
+        "county_land_use_code": { "type": ["string", "null"] },
+        "county_land_use_description": { "type": ["string", "null"] },
+        "standardized_land_use_category": { "type": ["string", "null"] },
+        "standardized_land_use_type": { "type": ["string", "null"] },
+        "location_descriptions": { "type": ["array", "null"], "items": { "type": "string" } },
+        "zoning": { "type": ["string", "null"] },
+        "building_count": { "type": ["integer", "null"] },
+        "tax_account_number": { "type": ["string", "null"] },
+        "legal_description": { "type": ["string", "null"] },
+        "lot_code": { "type": ["string", "null"] },
+        "lot_number": { "type": ["string", "null"] },
+        "subdivision": { "type": ["string", "null"] },
+        "municipality": { "type": ["string", "null"] },
+        "section_township_range": { "type": ["string", "null"] }
+      }
+    },
+    "structure": {
+      "type": "object",
+      "properties": {
+        "year_built": { "type": ["integer", "null"] },
+        "effective_year_built": { "type": ["integer", "null"] },
+        "stories": { "type": ["string", "null"] },
+        "rooms_count": { "type": ["integer", "null"] },
+        "beds_count": { "type": ["integer", "null"] },
+        "baths": { "type": ["number", "null"] },
+        "partial_baths_count": { "type": ["integer", "null"] },
+        "units_count": { "type": ["integer", "null"] },
+        "parking_type": { "type": ["string", "null"] },
+        "parking_spaces_count": { "type": ["integer", "null"] },
+        "pool_type": { "type": ["string", "null"] },
+        "architecture_type": { "type": ["string", "null"] },
+        "construction_type": { "type": ["string", "null"] },
+        "exterior_wall_type": { "type": ["string", "null"] },
+        "foundation_type": { "type": ["string", "null"] },
+        "roof_material_type": { "type": ["string", "null"] },
+        "roof_style_type": { "type": ["string", "null"] },
+        "heating_type": { "type": ["string", "null"] },
+        "heating_fuel_type": { "type": ["string", "null"] },
+        "air_conditioning_type": { "type": ["string", "null"] },
+        "fireplaces": { "type": ["string", "null"] },
+        "basement_type": { "type": ["string", "null"] },
+        "quality": { "type": ["string", "null"] },
+        "condition": { "type": ["string", "null"] },
+        "flooring_types": { "type": ["array", "null"], "items": { "type": "string" } },
+        "total_area_sq_ft": { "type": ["integer", "null"] }
+      }
+    },
+    "taxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "year": { "type": "integer" },
+          "amount": { "type": ["integer", "null"] },
+          "exemptions": { "type": ["array", "null"], "items": { "type": "string" } },
+          "rate_code_area": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "year": { "type": "integer" },
+          "land_value": { "type": ["integer", "null"] },
+          "improvement_value": { "type": ["integer", "null"] },
+          "total_value": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "market_assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "year": { "type": "integer" },
+          "land_value": { "type": ["integer", "null"] },
+          "improvement_value": { "type": ["integer", "null"] },
+          "total_value": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "valuation": {
+      "type": "object",
+      "properties": {
+        "value": { "type": ["integer", "null"] },
+        "high": { "type": ["integer", "null"] },
+        "low": { "type": ["integer", "null"] },
+        "forecast_standard_deviation": { "type": ["integer", "null"] },
+        "date": { "type": ["string", "null"], "format": "date" }
+      }
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "name": { "type": ["string", "null"] },
+        "second_name": { "type": ["string", "null"], "deprecated": true },
+        "formatted_street_address": { "type": ["string", "null"] },
+        "unit_type": { "type": ["string", "null"] },
+        "unit_number": { "type": ["string", "null"] },
+        "city": { "type": ["string", "null"] },
+        "state": { "type": ["string", "null"] },
+        "zip_code": { "type": ["string", "null"] },
+        "zip_plus_four_code": { "type": ["string", "null"] },
+        "owner_occupied": { "type": ["string", "null"], "enum": ["YES", "PROBABLE", null] }
+      }
+    },
+    "deeds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "document_type": { "type": ["string", "null"] },
+          "recording_date": { "type": ["string", "null"], "format": "date" },
+          "original_contract_date": { "type": ["string", "null"], "format": "date" },
+          "deed_book": { "type": ["string", "null"] },
+          "deed_page": { "type": ["string", "null"] },
+          "document_id": { "type": ["string", "null"] },
+          "sale_price": { "type": ["integer", "null"] },
+          "sale_price_description": { "type": ["string", "null"] },
+          "transfer_tax": { "type": ["number", "null"] },
+          "distressed_sale": { "type": ["boolean", "null"] },
+          "real_estate_owned": { "type": ["string", "null"] },
+          "seller_first_name": { "type": ["string", "null"] },
+          "seller_last_name": { "type": ["string", "null"] },
+          "buyer_first_name": { "type": ["string", "null"] },
+          "buyer_last_name": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "properties": {
+        "wkt": { "type": ["string", "null"] },
+        "geojson": {
+          "type": ["object", "null"],
+          "properties": {
+            "type": { "type": "string", "enum": ["MultiPolygon"] },
+            "coordinates": { "type": "array" }
+          }
+        }
+      }
+    }
+  }
+}

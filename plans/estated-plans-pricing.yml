@@ -1,0 +1,52 @@
+name: Estated Plans & Pricing
+description: >-
+  Commercial plans for the Estated Property Data API. Estated historically
+  offered self-serve pay-as-you-go and subscription tiers, with bulk/enterprise
+  pricing handled directly. Since the 2020 ATTOM Data acquisition, new
+  customer pricing is increasingly being routed through ATTOM Property Data
+  API plans, but existing Estated tokens remain valid. The exact public
+  pricing schedule is no longer prominently published on estated.com, so this
+  file captures the structural shape of the offering rather than active
+  per-unit dollar amounts.
+specificationVersion: "0.1"
+provider: estated
+currency: USD
+billing_models:
+  - per-request
+  - per-successful-match
+  - subscription
+  - enterprise-custom
+unbilled_events:
+  - PW01 - No property found for the given input
+  - PW02 - Multiple properties found for the given input
+  - APW01 - No address found for the given input
+  - APW02 - Unknown street suffix (only billable if a property match is also found)
+plans:
+  - name: Self-Serve / Developer
+    description: Per-call, pay-as-you-go access to the v4 Property API for low-volume use.
+    type: usage-based
+    billing_unit: successful property match
+    notes:
+      - Token issued via estated.com account signup.
+      - Free trial credits historically offered.
+      - Public per-call rate not currently published; contact ATTOM/Estated for current pricing.
+  - name: Subscription
+    description: Monthly fixed-fee bundle of property lookups, with per-call overage.
+    type: subscription
+    billing_unit: monthly call quota + overage per match
+    notes:
+      - Used by SaaS apps embedding property data into their workflows.
+  - name: Bulk / Enterprise
+    description: Custom contracts for high-volume integrators, including bulk APN/FIPS lookups, batch files, and white-glove onboarding.
+    type: enterprise
+    contact: https://www.attomdata.com/contact-us/
+    notes:
+      - Routed through ATTOM Data sales since 2020.
+      - Supports volume discounts, SLAs, and custom data scopes.
+links:
+  - type: Pricing
+    url: https://www.attomdata.com/solutions/property-data-api/
+  - type: Contact
+    url: https://www.attomdata.com/contact-us/
+  - type: AccountSignup
+    url: https://estated.com/login

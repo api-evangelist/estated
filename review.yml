@@ -1,0 +1,63 @@
+aid: estated
+provider: Estated
+reviewer: API Evangelist
+review_date: '2026-05-25'
+tier: Tier-1
+tier_rationale: >-
+  Estated publishes a single, fully documented v4 Property Data API with
+  real GET endpoint, real query-parameter schema, real response object
+  schema (assessor / parcel / structure / taxes / assessments /
+  market_assessments / valuation / owner / deeds / boundary), real error
+  and warning code tables, and a live developer documentation site. That
+  meets the Tier-1 bar of "real OpenAPI surface" (machine-actionable
+  endpoint with concrete request and response schemas), even though
+  Estated itself does not publish a first-party OpenAPI artifact — the
+  v4 docs contain enough normative content to author one accurately.
+parent_company: ATTOM Data Solutions
+acquired: '2020'
+acquisition_note: >-
+  Estated was acquired by ATTOM Data Solutions in 2020. The Estated platform
+  is being migrated to ATTOM infrastructure, existing API tokens remain
+  valid through the migration, and the Estated developer documentation is
+  scheduled to be deprecated during 2026. Future development effort is
+  expected to consolidate on ATTOM's property data API surface. The user
+  prompt referenced "First American" as the acquirer — that is not what the
+  Estated and ATTOM public materials state; the acquirer is ATTOM Data.
+status:
+  developer_portal: live
+  documentation: live, marked for deprecation during 2026
+  endpoint: live (https://apis.estated.com/v4/property)
+  authentication: API key via `token` query parameter
+  pricing_page: routed through ATTOM Data
+  github: present (github.com/estated, with `api` and `admin` private/empty-looking repos)
+strengths:
+  - Single, clear, well-scoped endpoint with multiple address-lookup modes.
+  - Rich, deeply nested property schema covering assessor, parcel, structure, valuation, owner, deeds, and parcel geometry.
+  - Explicit, enumerated error codes (APE01, ISE01-09, EE01, RE01-RE06, AE02-AE04) and warning codes (PW01, PW02, APW01, APW02).
+  - Explicit unbilled-warning policy — important for FinOps modeling.
+  - Boundary returned as both WKT and GeoJSON MultiPolygon — easy GIS integration.
+  - Stable URL structure that has survived the ATTOM transition so far.
+weaknesses:
+  - No first-party OpenAPI / Postman / SDK artifacts published.
+  - Authentication via query-string token rather than header — leaks into logs and referrers.
+  - Documented rate-limit numerics are not disclosed (clients only learn limits by hitting `RE04`).
+  - Pricing is not openly published on estated.com any longer — routed to ATTOM sales.
+  - Documentation slated to be deprecated during 2026; the migration target (ATTOM) is not yet seamlessly cross-linked.
+  - GitHub org is present but the public-facing repos are minimal — no SDKs, examples, or schema in source control.
+recommendations_to_provider:
+  - Publish a first-party OpenAPI 3.x spec covering /v4/property before the docs deprecation.
+  - Add a header-based API key option (X-API-Key or Authorization).
+  - Document rate-limit numerics (per-token RPS, monthly quotas) explicitly.
+  - Publish a clear estated.com -> attomdata.com migration mapping with side-by-side endpoint equivalents.
+  - Consider a JSON-LD context + GeoJSON-native responses to align with downstream property-data ecosystems.
+artifacts_generated:
+  - openapi/estated-property-data-api-openapi.yml
+  - json-schema/estated-property-schema.json
+  - json-ld/estated-context.jsonld
+  - examples/estated-get-property-example.json
+  - rules/estated-rules.yml
+  - capabilities/property-lookup.yaml
+  - plans/estated-plans-pricing.yml
+  - rate-limits/estated-rate-limits.yml
+  - finops/estated-finops.yml
+  - vocabulary/estated-vocabulary.yml

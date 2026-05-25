@@ -1,0 +1,60 @@
+name: Estated Vocabulary
+description: >-
+  Domain vocabulary for the Estated Property Data API v4, mapping property
+  records, parcels, assessments, deeds, and parcel boundaries to industry
+  terms used in real-estate, GIS, and tax assessor systems.
+version: "0.1"
+terms:
+  - term: Property
+    definition: A single U.S. real-estate parcel record, indexed by address or FIPS+APN.
+    schema_org: schema:RealEstateListing
+  - term: Address
+    definition: Postal address as standardized from the assessor's roll.
+    schema_org: schema:PostalAddress
+  - term: Parcel
+    definition: The legally defined tract of land identified by APN and FIPS code.
+    related: APN, FIPS, Zoning, LandUse
+  - term: APN
+    definition: Assessor Parcel Number — the county-issued identifier for a parcel.
+    aliases: [assessor_parcel_number, parcel_number]
+  - term: FIPS
+    definition: Federal Information Processing Standards code identifying U.S. counties.
+  - term: Structure
+    definition: The primary building(s) on a parcel — beds, baths, year built, materials.
+    schema_org: schema:Residence
+  - term: Assessment
+    definition: The assessor's valuation of land and improvements for tax purposes, by year.
+  - term: MarketAssessment
+    definition: The assessor's market-value estimate (distinct from taxable assessed value).
+  - term: Tax
+    definition: Annual property-tax amount levied by the taxing jurisdiction.
+  - term: Valuation
+    definition: Estated's Automated Valuation Model (AVM) estimate, with high/low and FSD.
+    related: AVM, ForecastStandardDeviation
+  - term: Owner
+    definition: Assessed owner of record, including mailing address and occupancy status.
+  - term: Deed
+    definition: A recorded real-estate transfer document, with buyer/seller and sale price.
+  - term: Boundary
+    definition: Parcel polygon geometry as WKT or GeoJSON MultiPolygon.
+    schema_org: schema:GeoShape
+  - term: GeocodingAccuracy
+    definition: Quality grade of address-to-coordinate match.
+  - term: LandUse
+    definition: Standardized land-use category and type derived from county land-use codes.
+  - term: ForecastStandardDeviation
+    definition: Confidence indicator (percentage 0-100) for the AVM valuation.
+  - term: Token
+    definition: Per-customer API key passed as the `token` query parameter.
+tags:
+  - PropertyData
+  - RealEstate
+  - PropertyRecords
+  - Assessor
+  - Parcels
+  - APN
+  - FIPS
+  - Deeds
+  - AVM
+  - GIS
+  - Boundaries
