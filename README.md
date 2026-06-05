@@ -1,72 +1,89 @@
-# Estated
+# Estated (estated)
 
-Estated is a property-data company offering a JSON REST API that returns detailed U.S. residential and commercial property records — assessor data, parcel geometry, structure characteristics, taxes, assessments, market assessments, valuation (AVM), owner of record, deeds, and parcel boundaries (WKT + GeoJSON). The current public surface is the **Property Data API v4** at `https://apis.estated.com/v4/property`, authenticated with a `token` query parameter.
+Estated is a property-data company that operates a JSON REST API returning detailed U.S. residential and commercial property records — assessor data, parcel geometry, structure characteristics, taxes, assessments, market assessments, valuation (AVM), owner of record, deeds, and parcel boundaries. Lookups can be performed by split address, parsed address components, a single combined address string, or by FIPS county code + assessor parcel number (APN). The current public surface is the Property Data API v4 at `https://apis.estated.com/v4/property`, authenticated with a `token` query parameter. Estated was acquired by ATTOM Data in 2020 and its infrastructure is being migrated to ATTOM; the Estated developer documentation is scheduled to be deprecated during 2026, after which property data access will be served through ATTOM's documentation and endpoints. Existing Estated tokens continue to work through the transition and no integration changes are required during the migration window.
 
-Estated was acquired by **ATTOM Data Solutions** in 2020. Infrastructure is being migrated to ATTOM; existing Estated tokens continue to work, and the standalone Estated developer docs are scheduled to be deprecated during 2026, after which property data access will be served through ATTOM's documentation and endpoints.
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/estated/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/estated/refs/heads/main/apis.yml)
 
-## API
+## Scope
 
-- **Estated Property Data API** — `GET /v4/property`
-  - Lookup modes: split address, parsed components, combined-address string, or FIPS+APN
-  - Docs: https://estated.com/developers/docs/v4
-  - Overview: https://estated.com/developers/docs/v4/property/overview
-  - Schema: https://estated.com/developers/docs/v4/property/schema
-  - OpenAPI: [`openapi/estated-property-data-api-openapi.yml`](openapi/estated-property-data-api-openapi.yml)
+- **Type:** API
+- **Position:** Provider
+- **Access:** 3rd-Party
 
-## Artifacts
+## Tags
 
-| Artifact | Path |
-|---|---|
-| OpenAPI 3.0.3 | [`openapi/estated-property-data-api-openapi.yml`](openapi/estated-property-data-api-openapi.yml) |
-| JSON Schema (Property) | [`json-schema/estated-property-schema.json`](json-schema/estated-property-schema.json) |
-| JSON-LD context | [`json-ld/estated-context.jsonld`](json-ld/estated-context.jsonld) |
-| Operation example | [`examples/estated-get-property-example.json`](examples/estated-get-property-example.json) |
-| Spectral rules | [`rules/estated-rules.yml`](rules/estated-rules.yml) |
-| Naftiko capability | [`capabilities/property-lookup.yaml`](capabilities/property-lookup.yaml) |
-| Plans & pricing | [`plans/estated-plans-pricing.yml`](plans/estated-plans-pricing.yml) |
-| Rate limits | [`rate-limits/estated-rate-limits.yml`](rate-limits/estated-rate-limits.yml) |
-| FinOps profile | [`finops/estated-finops.yml`](finops/estated-finops.yml) |
-| Vocabulary | [`vocabulary/estated-vocabulary.yml`](vocabulary/estated-vocabulary.yml) |
-| API Evangelist review | [`review.yml`](review.yml) |
-| apis.yml manifest | [`apis.yml`](apis.yml) |
+- Property Data
+- Real Estate
+- Property Records
+- Assessor
+- Parcels
+- APN
+- FIPS
+- Deeds
+- AVM
+- Valuation
+- Boundaries
+- GIS
+- Owner Of Record
+- Tax Assessment
 
-## Tier
+## Timestamps
 
-**Tier-1** — Estated publishes a single, fully documented v4 Property Data API with a real GET endpoint, complete query-parameter schema, deeply nested response object schema, and explicit error and warning code tables. That meets the Tier-1 bar for "real, machine-actionable API surface" even though Estated does not publish a first-party OpenAPI artifact.
+- **Created:** 2026-05-25
+- **Modified:** 2026-05-25
 
-## Authentication
+## APIs
 
-API key via the `token` query parameter:
+### Estated Property Data API
 
-```
-GET https://apis.estated.com/v4/property?token=YOUR_TOKEN_HERE&combined_address=151+Battle+Green+Dr%2C+Rochester%2C+NY+14624
-```
+Look up a U.S. property record by address (split, parsed, or combined) or by FIPS+APN. Returns a Property object containing address, parcel, structure, taxes, assessments, market_assessments, valuation, owner, deeds, and boundary (WKT + GeoJSON MultiPolygon). Authenticated via `token` query parameter.
 
-## Error & Warning Codes
+- **Human URL:** [https://estated.com/developers/docs/v4](https://estated.com/developers/docs/v4)
+- **Base URL:** `https://apis.estated.com`
 
-| Class | Codes |
-|---|---|
-| Address parsing | `APE01` |
-| Internal server | `ISE01`–`ISE09` |
-| Endpoint | `EE01` |
-| Request | `RE01`, `RE02`, `RE03`, `RE04` (throttle), `RE05`, `RE06` |
-| Authorization | `AE02` (invalid), `AE03` (no calls remaining), `AE04` (deactivated) |
-| Property warnings | `PW01` (none found), `PW02` (multiple) — not billable |
-| Address parser warnings | `APW01` (no address), `APW02` (unknown suffix) — usually not billable |
+#### Tags
 
-## Parent Company
+- Property Data
+- Real Estate
+- Parcels
+- Deeds
+- AVM
 
-- ATTOM Data Solutions — https://www.attomdata.com/
-- ATTOM Property Data API — https://www.attomdata.com/solutions/property-data-api/
-- Acquisition announcement — https://www.attomdata.com/news/company-news/attom-company-announcement-10/
+#### Properties
 
-## Links
+- [Documentation](https://estated.com/developers/docs/v4)
+- [Documentation](https://estated.com/developers/docs/v4/property/overview)
+- [Documentation](https://estated.com/developers/docs/v4/property/schema)
+- [Documentation](https://estated.com/developers/docs/v4/property/values)
+- [Sign Up](https://estated.com/login)
+- [OpenAPI](openapi/estated-property-data-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/estated-property-data-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/estated-property-data-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/estated-property-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](json-ld/estated-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Examples](examples/estated-get-property-example.json)
+- [Spectral Rules](rules/estated-rules.yml)
+- [Plans](plans/estated-plans-pricing.yml)
+- [Rate Limits](rate-limits/estated-rate-limits.yml)
+- [Fin Ops](finops/estated-finops.yml)
+- [Vocabulary](vocabulary/estated-vocabulary.yml)
 
-- Website: https://estated.com
-- Developer docs: https://estated.com/developers/docs/v4
-- Sign in: https://estated.com/login
-- GitHub: https://github.com/estated
+## Common Properties
 
-## Maintainer
+- [Website](https://estated.com)
+- [Developers](https://estated.com/developers/docs/v4)
+- [Documentation](https://estated.com/developers/docs/v4/property/overview)
+- [Schema](https://estated.com/developers/docs/v4/property/schema)
+- [Sign Up](https://estated.com/login)
+- [Parent Company](https://www.attomdata.com/)
+- [Acquisition Announcement](https://www.attomdata.com/news/company-news/attom-company-announcement-10/)
+- [Parent Company Product](https://www.attomdata.com/solutions/property-data-api/)
+- [Terms Of Use](https://www.attomdata.com/terms-of-use/)
+- [Privacy Policy](https://www.attomdata.com/privacy/)
+- [Contact](https://www.attomdata.com/contact-us/)
+- [Git Hub](https://github.com/estated)
 
-- Kin Lane — API Evangelist — kin@apievangelist.com
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

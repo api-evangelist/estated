@@ -1,19 +1,14 @@
 aid: estated
 name: Estated
 description: >-
-  Estated is a property-data company that operates a JSON REST API returning
-  detailed U.S. residential and commercial property records — assessor data,
-  parcel geometry, structure characteristics, taxes, assessments, market
-  assessments, valuation (AVM), owner of record, deeds, and parcel
-  boundaries. Lookups can be performed by split address, parsed address
-  components, a single combined address string, or by FIPS county code +
-  assessor parcel number (APN). The current public surface is the Property
-  Data API v4 at `https://apis.estated.com/v4/property`, authenticated with
-  a `token` query parameter. Estated was acquired by ATTOM Data in 2020 and
-  its infrastructure is being migrated to ATTOM; the Estated developer
-  documentation is scheduled to be deprecated during 2026, after which
-  property data access will be served through ATTOM's documentation and
-  endpoints. Existing Estated tokens continue to work through the transition
+  Estated is a property-data company that operates a JSON REST API returning detailed U.S. residential and commercial
+  property records — assessor data, parcel geometry, structure characteristics, taxes, assessments, market assessments,
+  valuation (AVM), owner of record, deeds, and parcel boundaries. Lookups can be performed by split address, parsed
+  address components, a single combined address string, or by FIPS county code + assessor parcel number (APN). The
+  current public surface is the Property Data API v4 at `https://apis.estated.com/v4/property`, authenticated with a
+  `token` query parameter. Estated was acquired by ATTOM Data in 2020 and its infrastructure is being migrated to ATTOM;
+  the Estated developer documentation is scheduled to be deprecated during 2026, after which property data access will
+  be served through ATTOM's documentation and endpoints. Existing Estated tokens continue to work through the transition
   and no integration changes are required during the migration window.
 type: API
 position: Provider
@@ -42,11 +37,9 @@ apis:
   - aid: estated:property-data-api
     name: Estated Property Data API
     description: >-
-      Look up a U.S. property record by address (split, parsed, or combined)
-      or by FIPS+APN. Returns a Property object containing address, parcel,
-      structure, taxes, assessments, market_assessments, valuation, owner,
-      deeds, and boundary (WKT + GeoJSON MultiPolygon). Authenticated via
-      `token` query parameter.
+      Look up a U.S. property record by address (split, parsed, or combined) or by FIPS+APN. Returns a Property object
+      containing address, parcel, structure, taxes, assessments, market_assessments, valuation, owner, deeds, and
+      boundary (WKT + GeoJSON MultiPolygon). Authenticated via `token` query parameter.
     humanURL: https://estated.com/developers/docs/v4
     baseURL: https://apis.estated.com
     tags:
@@ -76,8 +69,6 @@ apis:
         url: examples/estated-get-property-example.json
       - type: SpectralRules
         url: rules/estated-rules.yml
-      - type: NaftikoCapability
-        url: capabilities/property-lookup.yaml
       - type: Plans
         url: plans/estated-plans-pricing.yml
       - type: RateLimits
