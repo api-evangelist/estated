@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Estated Property Data API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Property",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apis.estated.com/v4/property",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "API token issued by Estated / ATTOM."
+              },
+              {
+                "name": "combined_address",
+                "value": "",
+                "type": "query",
+                "description": "Full address in a single comma-separated string (street, city, state, zip)."
+              },
+              {
+                "name": "street_address",
+                "value": "",
+                "type": "query",
+                "description": "Full street address line including number, name, and suffix."
+              },
+              {
+                "name": "street_number",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "street_pre_direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "street_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "street_suffix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "street_post_direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit_number",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "zip_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fips",
+                "value": "",
+                "type": "query",
+                "description": "5-digit FIPS county code (paired with `apn`)."
+              },
+              {
+                "name": "apn",
+                "value": "",
+                "type": "query",
+                "description": "Assessor parcel number (paired with `fips`)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Property object for a U.S. address. Use the `combined_address` parameter for a single-string lookup, the parsed `street_number` / `street_name` / `street_suffix` family for tightly-parsed lookups, the `street_address` + `city` + `state` family for split lookups, or `fips` + `apn` for parcel-number lookups. All requests are HTTP GET."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
