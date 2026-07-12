@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/estated-property-data-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: tokenQuery
+  type: apiKey
+  in: query
+  parameter: token
+  sources:
+  - openapi/estated-property-data-api-openapi.yml
