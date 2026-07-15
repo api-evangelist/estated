@@ -81,6 +81,8 @@ apis:
       - FN: ATTOM Data Support (Estated)
         url: https://www.attomdata.com/contact-us/
 common:
+  - type: AgenticAccess
+    url: agentic-access/estated-agentic-access.yml
   - type: DomainSecurity
     url: security/estated-domain-security.yml
   - type: Authentication
