@@ -1,0 +1,548 @@
+openapi: 3.0.3
+info:
+  title: Estated Data Property API
+  version: '4.0'
+  description: The Estated Property Data API (v4) returns assessor, parcel, structure, valuation, owner, deed, and boundary data for U.S. residential and commercial properties. Lookups can be performed using a split address (street_address + city + state), parsed address components, a single combined address string, or a FIPS code + APN pair. Each successful response returns a Property object containing metadata, address, parcel, structure, taxes, assessments, market_assessments, valuation, owner, deeds, and boundary sections. Estated was acquired by ATTOM Data in 2020 and the underlying platform is being migrated to ATTOM infrastructure; existing tokens continue to work but documentation will be deprecated during 2026.
+  contact:
+    name: ATTOM Data (Estated)
+    url: https://www.attomdata.com/contact-us/
+  license:
+    name: Commercial
+    url: https://www.attomdata.com/terms-of-use/
+servers:
+- url: https://apis.estated.com
+  description: Production API endpoint
+security:
+- tokenQuery: []
+tags:
+- name: Property
+paths:
+  /v4/property:
+    get:
+      operationId: getProperty
+      summary: Get Property
+      description: Retrieve a Property object for a U.S. address. Use the `combined_address` parameter for a single-string lookup, the parsed `street_number` / `street_name` / `street_suffix` family for tightly-parsed lookups, the `street_address` + `city` + `state` family for split lookups, or `fips` + `apn` for parcel-number lookups. All requests are HTTP GET.
+      tags:
+      - Property
+      parameters:
+      - name: token
+        in: query
+        required: true
+        description: API token issued by Estated / ATTOM.
+        schema:
+          type: string
+      - name: combined_address
+        in: query
+        required: false
+        description: Full address in a single comma-separated string (street, city, state, zip).
+        schema:
+          type: string
+      - name: street_address
+        in: query
+        required: false
+        description: Full street address line including number, name, and suffix.
+        schema:
+          type: string
+      - name: street_number
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: street_pre_direction
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: street_name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: street_suffix
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: street_post_direction
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: unit_type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: unit_number
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: city
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: zip_code
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fips
+        in: query
+        required: false
+        description: 5-digit FIPS county code (paired with `apn`).
+        schema:
+          type: string
+      - name: apn
+        in: query
+        required: false
+        description: Assessor parcel number (paired with `fips`).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A property envelope containing data, metadata, and warnings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyEnvelope'
+        '400':
+          description: Request error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          description: Authorization error (invalid, deactivated, or exhausted token).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '429':
+          description: Throttled due to high request rate.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+components:
+  schemas:
+    Assessment:
+      type: object
+      properties:
+        year:
+          type: integer
+        land_value:
+          type: integer
+        improvement_value:
+          type: integer
+        total_value:
+          type: integer
+    Boundary:
+      type: object
+      description: Parcel boundary geometry.
+      properties:
+        wkt:
+          type: string
+          description: Well-Known Text MultiPolygon representation.
+        geojson:
+          type: object
+          description: GeoJSON MultiPolygon representation of the parcel.
+          properties:
+            type:
+              type: string
+              example: MultiPolygon
+            coordinates:
+              type: array
+              items:
+                type: array
+    ResponseMetadata:
+      type: object
+      properties:
+        attom_id:
+          type: integer
+          description: Unique ATTOM ID associated with the property.
+        publishing_date:
+          type: string
+          format: date
+          description: Date the assessor roll data was published.
+    Tax:
+      type: object
+      properties:
+        year:
+          type: integer
+        amount:
+          type: integer
+        exemptions:
+          type: array
+          items:
+            type: string
+        rate_code_area:
+          type: string
+    Valuation:
+      type: object
+      properties:
+        value:
+          type: integer
+        high:
+          type: integer
+        low:
+          type: integer
+        forecast_standard_deviation:
+          type: integer
+        date:
+          type: string
+          format: date
+    Structure:
+      type: object
+      properties:
+        year_built:
+          type: integer
+        effective_year_built:
+          type: integer
+        stories:
+          type: string
+        rooms_count:
+          type: integer
+        beds_count:
+          type: integer
+        baths:
+          type: number
+          format: float
+        partial_baths_count:
+          type: integer
+        units_count:
+          type: integer
+        parking_type:
+          type: string
+        parking_spaces_count:
+          type: integer
+        pool_type:
+          type: string
+        architecture_type:
+          type: string
+        construction_type:
+          type: string
+        exterior_wall_type:
+          type: string
+        foundation_type:
+          type: string
+        roof_material_type:
+          type: string
+        roof_style_type:
+          type: string
+        heating_type:
+          type: string
+        heating_fuel_type:
+          type: string
+        air_conditioning_type:
+          type: string
+        fireplaces:
+          type: string
+        basement_type:
+          type: string
+        quality:
+          type: string
+        condition:
+          type: string
+        flooring_types:
+          type: array
+          items:
+            type: string
+        plumbing_fixtures_count:
+          type: integer
+        interior_wall_type:
+          type: string
+        water_type:
+          type: string
+        sewer_type:
+          type: string
+        total_area_sq_ft:
+          type: integer
+        amenities:
+          type: array
+          items:
+            type: string
+        other_improvements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AreaItem'
+        other_rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/AreaItem'
+        other_features:
+          type: array
+          items:
+            $ref: '#/components/schemas/AreaItem'
+        other_areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/AreaItem'
+    PropertyEnvelope:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Property'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Warning'
+    Address:
+      type: object
+      properties:
+        street_number:
+          type: string
+        street_pre_direction:
+          type: string
+        street_name:
+          type: string
+        street_suffix:
+          type: string
+        street_post_direction:
+          type: string
+        unit_type:
+          type: string
+        unit_number:
+          type: string
+        formatted_street_address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        zip_plus_four_code:
+          type: string
+        carrier_code:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        geocoding_accuracy:
+          type: string
+        census_tract:
+          type: string
+    Parcel:
+      type: object
+      properties:
+        apn_original:
+          type: string
+        apn_unformatted:
+          type: string
+        apn_previous:
+          type: string
+        fips_code:
+          type: string
+        depth_ft:
+          type: number
+          format: float
+        frontage_ft:
+          type: number
+          format: float
+        area_sq_ft:
+          type: integer
+        area_acres:
+          type: number
+          format: float
+        county_name:
+          type: string
+        county_land_use_code:
+          type: string
+        county_land_use_description:
+          type: string
+        standardized_land_use_category:
+          type: string
+        standardized_land_use_type:
+          type: string
+        location_descriptions:
+          type: array
+          items:
+            type: string
+        zoning:
+          type: string
+        building_count:
+          type: integer
+        tax_account_number:
+          type: string
+        legal_description:
+          type: string
+        lot_code:
+          type: string
+        lot_number:
+          type: string
+        subdivision:
+          type: string
+        municipality:
+          type: string
+        section_township_range:
+          type: string
+    ErrorEnvelope:
+      type: object
+      properties:
+        data:
+          nullable: true
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Warning'
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Estated error code (APE01, ISE01-09, EE01, RE01-RE06, AE02-AE04).
+            message:
+              type: string
+    AreaItem:
+      type: object
+      properties:
+        type:
+          type: string
+        sq_ft:
+          type: string
+    Property:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+        address:
+          $ref: '#/components/schemas/Address'
+        parcel:
+          $ref: '#/components/schemas/Parcel'
+        structure:
+          $ref: '#/components/schemas/Structure'
+        taxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tax'
+        assessments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assessment'
+        market_assessments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assessment'
+        valuation:
+          $ref: '#/components/schemas/Valuation'
+        owner:
+          $ref: '#/components/schemas/Owner'
+        deeds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deed'
+        boundary:
+          $ref: '#/components/schemas/Boundary'
+    Warning:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Warning code (PW01, PW02, APW01, APW02).
+        message:
+          type: string
+    Owner:
+      type: object
+      properties:
+        name:
+          type: string
+        second_name:
+          type: string
+          deprecated: true
+        formatted_street_address:
+          type: string
+        unit_type:
+          type: string
+        unit_number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        zip_plus_four_code:
+          type: string
+        owner_occupied:
+          type: string
+    Deed:
+      type: object
+      properties:
+        document_type:
+          type: string
+        recording_date:
+          type: string
+          format: date
+        original_contract_date:
+          type: string
+          format: date
+        deed_book:
+          type: string
+        deed_page:
+          type: string
+        document_id:
+          type: string
+        sale_price:
+          type: integer
+        sale_price_description:
+          type: string
+        transfer_tax:
+          type: number
+          format: float
+        distressed_sale:
+          type: boolean
+        real_estate_owned:
+          type: string
+        seller_first_name:
+          type: string
+        seller_last_name:
+          type: string
+        seller2_first_name:
+          type: string
+        seller2_last_name:
+          type: string
+        seller_address:
+          type: string
+        seller_unit_number:
+          type: string
+        seller_city:
+          type: string
+        seller_state:
+          type: string
+        seller_zip_code:
+          type: string
+        seller_zip_plus_four_code:
+          type: string
+        buyer_first_name:
+          type: string
+        buyer_last_name:
+          type: string
+        buyer2_first_name:
+          type: string
+        buyer2_last_name:
+          type: string
+  securitySchemes:
+    tokenQuery:
+      type: apiKey
+      in: query
+      name: token
