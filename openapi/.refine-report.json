@@ -1,0 +1,14 @@
+{
+  "provider": "estated",
+  "sources": [
+    "estated-property-api-openapi.yml"
+  ],
+  "outputs": [
+    "estated-property-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
