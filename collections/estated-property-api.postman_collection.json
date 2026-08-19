@@ -1,0 +1,671 @@
+{
+  "item": [
+    {
+      "id": "3ba34f18-be73-40c2-8143-b84e6b3ba354",
+      "name": "Property",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c53a6fc4-9ba3-430c-8b58-88655f61eca0",
+          "name": "Get Property",
+          "request": {
+            "name": "Get Property",
+            "description": {
+              "content": "Retrieve a Property object for a U.S. address. Use the `combined_address` parameter for a single-string lookup, the parsed `street_number` / `street_name` / `street_suffix` family for tightly-parsed lookups, the `street_address` + `city` + `state` family for split lookups, or `fips` + `apn` for parcel-number lookups. All requests are HTTP GET.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "property"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) API token issued by Estated / ATTOM."
+                },
+                {
+                  "disabled": false,
+                  "key": "combined_address",
+                  "value": "<string>",
+                  "description": "Full address in a single comma-separated string (street, city, state, zip)."
+                },
+                {
+                  "disabled": false,
+                  "key": "street_address",
+                  "value": "<string>",
+                  "description": "Full street address line including number, name, and suffix."
+                },
+                {
+                  "disabled": false,
+                  "key": "street_number",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "street_pre_direction",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "street_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "street_suffix",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "street_post_direction",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit_number",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "zip_code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fips",
+                  "value": "<string>",
+                  "description": "5-digit FIPS county code (paired with `apn`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "apn",
+                  "value": "<string>",
+                  "description": "Assessor parcel number (paired with `fips`)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8bddb0c5-3315-4ef3-a851-79e9a2377b05",
+              "name": "A property envelope containing data, metadata, and warnings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "combined_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_pre_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_post_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"metadata\": {\n      \"attom_id\": 9548,\n      \"publishing_date\": \"1991-11-21\"\n    },\n    \"address\": {\n      \"street_number\": \"string\",\n      \"street_pre_direction\": \"string\",\n      \"street_name\": \"string\",\n      \"street_suffix\": \"string\",\n      \"street_post_direction\": \"string\",\n      \"unit_type\": \"string\",\n      \"unit_number\": \"string\",\n      \"formatted_street_address\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip_code\": \"string\",\n      \"zip_plus_four_code\": \"string\",\n      \"carrier_code\": \"string\",\n      \"latitude\": 8252.568489499277,\n      \"longitude\": 6218.2530435254375,\n      \"geocoding_accuracy\": \"string\",\n      \"census_tract\": \"string\"\n    },\n    \"parcel\": {\n      \"apn_original\": \"string\",\n      \"apn_unformatted\": \"string\",\n      \"apn_previous\": \"string\",\n      \"fips_code\": \"string\",\n      \"depth_ft\": 5910.5014092974125,\n      \"frontage_ft\": 2318.7733390378794,\n      \"area_sq_ft\": 2486,\n      \"area_acres\": 3419.541098099388,\n      \"county_name\": \"string\",\n      \"county_land_use_code\": \"string\",\n      \"county_land_use_description\": \"string\",\n      \"standardized_land_use_category\": \"string\",\n      \"standardized_land_use_type\": \"string\",\n      \"location_descriptions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"zoning\": \"string\",\n      \"building_count\": 3705,\n      \"tax_account_number\": \"string\",\n      \"legal_description\": \"string\",\n      \"lot_code\": \"string\",\n      \"lot_number\": \"string\",\n      \"subdivision\": \"string\",\n      \"municipality\": \"string\",\n      \"section_township_range\": \"string\"\n    },\n    \"structure\": {\n      \"year_built\": 9359,\n      \"effective_year_built\": 7514,\n      \"stories\": \"string\",\n      \"rooms_count\": 2805,\n      \"beds_count\": 2553,\n      \"baths\": 7132.956128763539,\n      \"partial_baths_count\": 3675,\n      \"units_count\": 790,\n      \"parking_type\": \"string\",\n      \"parking_spaces_count\": 3250,\n      \"pool_type\": \"string\",\n      \"architecture_type\": \"string\",\n      \"construction_type\": \"string\",\n      \"exterior_wall_type\": \"string\",\n      \"foundation_type\": \"string\",\n      \"roof_material_type\": \"string\",\n      \"roof_style_type\": \"string\",\n      \"heating_type\": \"string\",\n      \"heating_fuel_type\": \"string\",\n      \"air_conditioning_type\": \"string\",\n      \"fireplaces\": \"string\",\n      \"basement_type\": \"string\",\n      \"quality\": \"string\",\n      \"condition\": \"string\",\n      \"flooring_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"plumbing_fixtures_count\": 7839,\n      \"interior_wall_type\": \"string\",\n      \"water_type\": \"string\",\n      \"sewer_type\": \"string\",\n      \"total_area_sq_ft\": 254,\n      \"amenities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"other_improvements\": [\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        }\n      ],\n      \"other_rooms\": [\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        }\n      ],\n      \"other_features\": [\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        }\n      ],\n      \"other_areas\": [\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"sq_ft\": \"string\"\n        }\n      ]\n    },\n    \"taxes\": [\n      {\n        \"year\": 3001,\n        \"amount\": 4625,\n        \"exemptions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"rate_code_area\": \"string\"\n      },\n      {\n        \"year\": 9897,\n        \"amount\": 3899,\n        \"exemptions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"rate_code_area\": \"string\"\n      }\n    ],\n    \"assessments\": [\n      {\n        \"year\": 101,\n        \"land_value\": 4984,\n        \"improvement_value\": 6665,\n        \"total_value\": 8998\n      },\n      {\n        \"year\": 5289,\n        \"land_value\": 5115,\n        \"improvement_value\": 2013,\n        \"total_value\": 6355\n      }\n    ],\n    \"market_assessments\": [\n      {\n        \"year\": 9526,\n        \"land_value\": 5379,\n        \"improvement_value\": 512,\n        \"total_value\": 6731\n      },\n      {\n        \"year\": 5632,\n        \"land_value\": 5431,\n        \"improvement_value\": 2708,\n        \"total_value\": 3342\n      }\n    ],\n    \"valuation\": {\n      \"value\": 9237,\n      \"high\": 8023,\n      \"low\": 2253,\n      \"forecast_standard_deviation\": 9648,\n      \"date\": \"2004-01-01\"\n    },\n    \"owner\": {\n      \"name\": \"string\",\n      \"second_name\": \"string\",\n      \"formatted_street_address\": \"string\",\n      \"unit_type\": \"string\",\n      \"unit_number\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip_code\": \"string\",\n      \"zip_plus_four_code\": \"string\",\n      \"owner_occupied\": \"string\"\n    },\n    \"deeds\": [\n      {\n        \"document_type\": \"string\",\n        \"recording_date\": \"1986-04-10\",\n        \"original_contract_date\": \"1975-11-12\",\n        \"deed_book\": \"string\",\n        \"deed_page\": \"string\",\n        \"document_id\": \"string\",\n        \"sale_price\": 7448,\n        \"sale_price_description\": \"string\",\n        \"transfer_tax\": 3653.3100833859144,\n        \"distressed_sale\": true,\n        \"real_estate_owned\": \"string\",\n        \"seller_first_name\": \"string\",\n        \"seller_last_name\": \"string\",\n        \"seller2_first_name\": \"string\",\n        \"seller2_last_name\": \"string\",\n        \"seller_address\": \"string\",\n        \"seller_unit_number\": \"string\",\n        \"seller_city\": \"string\",\n        \"seller_state\": \"string\",\n        \"seller_zip_code\": \"string\",\n        \"seller_zip_plus_four_code\": \"string\",\n        \"buyer_first_name\": \"string\",\n        \"buyer_last_name\": \"string\",\n        \"buyer2_first_name\": \"string\",\n        \"buyer2_last_name\": \"string\"\n      },\n      {\n        \"document_type\": \"string\",\n        \"recording_date\": \"1958-04-30\",\n        \"original_contract_date\": \"1992-07-04\",\n        \"deed_book\": \"string\",\n        \"deed_page\": \"string\",\n        \"document_id\": \"string\",\n        \"sale_price\": 3932,\n        \"sale_price_description\": \"string\",\n        \"transfer_tax\": 55.49640675268752,\n        \"distressed_sale\": true,\n        \"real_estate_owned\": \"string\",\n        \"seller_first_name\": \"string\",\n        \"seller_last_name\": \"string\",\n        \"seller2_first_name\": \"string\",\n        \"seller2_last_name\": \"string\",\n        \"seller_address\": \"string\",\n        \"seller_unit_number\": \"string\",\n        \"seller_city\": \"string\",\n        \"seller_state\": \"string\",\n        \"seller_zip_code\": \"string\",\n        \"seller_zip_plus_four_code\": \"string\",\n        \"buyer_first_name\": \"string\",\n        \"buyer_last_name\": \"string\",\n        \"buyer2_first_name\": \"string\",\n        \"buyer2_last_name\": \"string\"\n      }\n    ],\n    \"boundary\": {\n      \"wkt\": \"string\",\n      \"geojson\": {\n        \"type\": \"MultiPolygon\",\n        \"coordinates\": [\n          [],\n          []\n        ]\n      }\n    }\n  },\n  \"metadata\": {\n    \"attom_id\": 1226,\n    \"publishing_date\": \"2009-05-05\"\n  },\n  \"warnings\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72b12d22-154f-46ef-8b09-e3bdca048a37",
+              "name": "Request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "combined_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_pre_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_post_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"metadata\": {\n    \"attom_id\": 113,\n    \"publishing_date\": \"1946-11-16\"\n  },\n  \"warnings\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "965e93ca-ef5e-4ead-8903-4e09ef68e211",
+              "name": "Authorization error (invalid, deactivated, or exhausted token).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "combined_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_pre_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_post_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"metadata\": {\n    \"attom_id\": 6312,\n    \"publishing_date\": \"1994-11-20\"\n  },\n  \"warnings\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f82d289-7713-43a1-bacb-6739827b00de",
+              "name": "Throttled due to high request rate.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "combined_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_pre_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_post_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"metadata\": {\n    \"attom_id\": 6312,\n    \"publishing_date\": \"1994-11-20\"\n  },\n  \"warnings\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "260a222f-4e3a-4ee3-9bf8-9f1c32c98cec",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "combined_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_pre_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "street_post_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fips",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"metadata\": {\n    \"attom_id\": 6312,\n    \"publishing_date\": \"1994-11-20\"\n  },\n  \"warnings\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apis.estated.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5e94da1f-ef2f-422d-9740-c9821dbf3b7a",
+    "name": "Estated Data Property API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Estated Property Data API (v4) returns assessor, parcel, structure, valuation, owner, deed, and boundary data for U.S. residential and commercial properties. Lookups can be performed using a split address (street_address + city + state), parsed address components, a single combined address string, or a FIPS code + APN pair. Each successful response returns a Property object containing metadata, address, parcel, structure, taxes, assessments, market_assessments, valuation, owner, deeds, and boundary sections. Estated was acquired by ATTOM Data in 2020 and the underlying platform is being migrated to ATTOM infrastructure; existing tokens continue to work but documentation will be deprecated during 2026.\n\nContact Support:\n Name: ATTOM Data (Estated)",
+      "type": "text/plain"
+    }
+  }
+}
