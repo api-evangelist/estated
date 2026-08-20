@@ -29,6 +29,21 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/estated.png
 tags:
   - Property Data
+  - Real-Estate
+  - Property Records
+  - Assessor
+  - Parcels
+  - APN
+  - FIPS
+  - Deeds
+  - AVM
+  - Valuation
+  - Boundaries
+  - GIS
+  - Owner Of Record
+  - Tax Assessment
+tags_raw:
+  - Property Data
   - Real Estate
   - Property Records
   - Assessor
