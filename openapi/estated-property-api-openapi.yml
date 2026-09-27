@@ -138,6 +138,86 @@ paths:
                 $ref: '#/components/schemas/ErrorEnvelope'
 components:
   schemas:
+    ResponseMetadata:
+      type: object
+      properties:
+        attom_id:
+          type: integer
+          description: Unique ATTOM ID associated with the property.
+        publishing_date:
+          type: string
+          format: date
+          description: Date the assessor roll data was published.
+    Tax:
+      type: object
+      properties:
+        year:
+          type: integer
+        amount:
+          type: integer
+        exemptions:
+          type: array
+          items:
+            type: string
+        rate_code_area:
+          type: string
+    Address:
+      type: object
+      properties:
+        street_number:
+          type: string
+        street_pre_direction:
+          type: string
+        street_name:
+          type: string
+        street_suffix:
+          type: string
+        street_post_direction:
+          type: string
+        unit_type:
+          type: string
+        unit_number:
+          type: string
+        formatted_street_address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        zip_plus_four_code:
+          type: string
+        carrier_code:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        geocoding_accuracy:
+          type: string
+        census_tract:
+          type: string
+    Boundary:
+      type: object
+      description: Parcel boundary geometry.
+      properties:
+        wkt:
+          type: string
+          description: Well-Known Text MultiPolygon representation.
+        geojson:
+          type: object
+          description: GeoJSON MultiPolygon representation of the parcel.
+          properties:
+            type:
+              type: string
+              example: MultiPolygon
+            coordinates:
+              type: array
+              items:
+                type: array
     Property:
       type: object
       properties:
@@ -171,110 +251,30 @@ components:
             $ref: '#/components/schemas/Deed'
         boundary:
           $ref: '#/components/schemas/Boundary'
-    AreaItem:
+    Owner:
       type: object
       properties:
-        type:
+        name:
           type: string
-        sq_ft:
+        second_name:
           type: string
-    Parcel:
-      type: object
-      properties:
-        apn_original:
+          deprecated: true
+        formatted_street_address:
           type: string
-        apn_unformatted:
+        unit_type:
           type: string
-        apn_previous:
+        unit_number:
           type: string
-        fips_code:
+        city:
           type: string
-        depth_ft:
-          type: number
-          format: float
-        frontage_ft:
-          type: number
-          format: float
-        area_sq_ft:
-          type: integer
-        area_acres:
-          type: number
-          format: float
-        county_name:
+        state:
           type: string
-        county_land_use_code:
+        zip_code:
           type: string
-        county_land_use_description:
+        zip_plus_four_code:
           type: string
-        standardized_land_use_category:
+        owner_occupied:
           type: string
-        standardized_land_use_type:
-          type: string
-        location_descriptions:
-          type: array
-          items:
-            type: string
-        zoning:
-          type: string
-        building_count:
-          type: integer
-        tax_account_number:
-          type: string
-        legal_description:
-          type: string
-        lot_code:
-          type: string
-        lot_number:
-          type: string
-        subdivision:
-          type: string
-        municipality:
-          type: string
-        section_township_range:
-          type: string
-    ErrorEnvelope:
-      type: object
-      properties:
-        data: {}
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
-        warnings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Warning'
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Estated error code (APE01, ISE01-09, EE01, RE01-RE06, AE02-AE04).
-            message:
-              type: string
-    Valuation:
-      type: object
-      properties:
-        value:
-          type: integer
-        high:
-          type: integer
-        low:
-          type: integer
-        forecast_standard_deviation:
-          type: integer
-        date:
-          type: string
-          format: date
-    PropertyEnvelope:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Property'
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
-        warnings:
-          type: array
-          items:
-            $ref: '#/components/schemas/Warning'
     Deed:
       type: object
       properties:
@@ -331,29 +331,77 @@ components:
           type: string
         buyer2_last_name:
           type: string
-    Assessment:
+    ErrorEnvelope:
       type: object
       properties:
-        year:
-          type: integer
-        land_value:
-          type: integer
-        improvement_value:
-          type: integer
-        total_value:
-          type: integer
-    Tax:
+        data: {}
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Warning'
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Estated error code (APE01, ISE01-09, EE01, RE01-RE06, AE02-AE04).
+            message:
+              type: string
+    Parcel:
       type: object
       properties:
-        year:
+        apn_original:
+          type: string
+        apn_unformatted:
+          type: string
+        apn_previous:
+          type: string
+        fips_code:
+          type: string
+        depth_ft:
+          type: number
+          format: float
+        frontage_ft:
+          type: number
+          format: float
+        area_sq_ft:
           type: integer
-        amount:
-          type: integer
-        exemptions:
+        area_acres:
+          type: number
+          format: float
+        county_name:
+          type: string
+        county_land_use_code:
+          type: string
+        county_land_use_description:
+          type: string
+        standardized_land_use_category:
+          type: string
+        standardized_land_use_type:
+          type: string
+        location_descriptions:
           type: array
           items:
             type: string
-        rate_code_area:
+        zoning:
+          type: string
+        building_count:
+          type: integer
+        tax_account_number:
+          type: string
+        legal_description:
+          type: string
+        lot_code:
+          type: string
+        lot_number:
+          type: string
+        subdivision:
+          type: string
+        municipality:
+          type: string
+        section_township_range:
           type: string
     Structure:
       type: object
@@ -441,97 +489,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AreaItem'
-    ResponseMetadata:
+    Valuation:
       type: object
       properties:
-        attom_id:
+        value:
           type: integer
-          description: Unique ATTOM ID associated with the property.
-        publishing_date:
+        high:
+          type: integer
+        low:
+          type: integer
+        forecast_standard_deviation:
+          type: integer
+        date:
           type: string
           format: date
-          description: Date the assessor roll data was published.
-    Owner:
+    PropertyEnvelope:
       type: object
       properties:
-        name:
-          type: string
-        second_name:
-          type: string
-          deprecated: true
-        formatted_street_address:
-          type: string
-        unit_type:
-          type: string
-        unit_number:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip_code:
-          type: string
-        zip_plus_four_code:
-          type: string
-        owner_occupied:
-          type: string
-    Address:
+        data:
+          $ref: '#/components/schemas/Property'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Warning'
+    AreaItem:
       type: object
       properties:
-        street_number:
+        type:
           type: string
-        street_pre_direction:
+        sq_ft:
           type: string
-        street_name:
-          type: string
-        street_suffix:
-          type: string
-        street_post_direction:
-          type: string
-        unit_type:
-          type: string
-        unit_number:
-          type: string
-        formatted_street_address:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip_code:
-          type: string
-        zip_plus_four_code:
-          type: string
-        carrier_code:
-          type: string
-        latitude:
-          type: number
-          format: float
-        longitude:
-          type: number
-          format: float
-        geocoding_accuracy:
-          type: string
-        census_tract:
-          type: string
-    Boundary:
-      type: object
-      description: Parcel boundary geometry.
-      properties:
-        wkt:
-          type: string
-          description: Well-Known Text MultiPolygon representation.
-        geojson:
-          type: object
-          description: GeoJSON MultiPolygon representation of the parcel.
-          properties:
-            type:
-              type: string
-              example: MultiPolygon
-            coordinates:
-              type: array
-              items:
-                type: array
     Warning:
       type: object
       properties:
@@ -540,6 +529,17 @@ components:
           description: Warning code (PW01, PW02, APW01, APW02).
         message:
           type: string
+    Assessment:
+      type: object
+      properties:
+        year:
+          type: integer
+        land_value:
+          type: integer
+        improvement_value:
+          type: integer
+        total_value:
+          type: integer
   securitySchemes:
     tokenQuery:
       type: apiKey
