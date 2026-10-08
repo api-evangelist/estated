@@ -40,12 +40,16 @@ accessModel:
 position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/estated.png
+x-status: "acquired"
+x-acquired-by: "attomdata"
+x-acquired-date: "2022-08-16"
+x-status-source: "https://www.attomdata.com/news/company-news/attom-company-announcement-10/"
+x-status-evidence: "ATTOM announced its acquisition of Estated on 2022-08-16 (also Inman, 2022-08-16: https://www.inman.com/2022/08/16/attom-acquires-property-data-company-estated/); estated.com now reads 'Estated is now part of ATTOM Data' and keeps the legacy Estated API docs (checked 2026-10-08, roadmap#925)"
 tags:
   - Property Data
   - Real Estate
   - Property Records
   - Assessor
-  - Parcel
   - APN
   - FIPS
   - Deeds
@@ -55,12 +59,13 @@ tags:
   - GIS
   - Owner Of Record
   - Tax Assessment
+  - Land Parcels
+  - Acquired
 tags_raw:
   - Property Data
   - Real Estate
   - Property Records
   - Assessor
-  - Parcels
   - APN
   - FIPS
   - Deeds
@@ -71,6 +76,8 @@ tags_raw:
   - Owner Of Record
   - Tax Assessment
   - Real-Estate
+  - Land Parcels
+  - Acquired
 url: https://raw.githubusercontent.com/api-evangelist/estated/refs/heads/main/apis.yml
 created: '2026-05-25'
 modified: '2026-05-25'
@@ -113,6 +120,12 @@ apis:
   - type: Vocabulary
     url: vocabulary/estated-vocabulary.yml
 common:
+  - type: Plans
+    url: plans/estated-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/estated-rate-limits.yml
+  - type: FinOps
+    url: finops/estated-finops.yml
   - type: AgenticAccess
     url: agentic-access/estated-agentic-access.yml
   - type: DomainSecurity
@@ -146,3 +159,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-tags-removed:
+- Parcel
