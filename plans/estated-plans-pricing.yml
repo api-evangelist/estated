@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Estated Plans & Pricing
 description: >-
   Commercial plans for the Estated Property Data API. Estated historically
@@ -50,3 +54,30 @@ links:
     url: https://www.attomdata.com/contact-us/
   - type: AccountSignup
     url: https://estated.com/login
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - negotiated
+  - subscription
+  units: []
+  plans:
+  - name: Self-Serve / Developer
+    access: other
+    model: metered
+    model_how: stated
+    units: []
+    periods: []
+  - name: Subscription
+    access: other
+    model: subscription
+    model_how: stated
+    units: []
+    periods: []
+  - name: Bulk / Enterprise
+    access: enterprise
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
